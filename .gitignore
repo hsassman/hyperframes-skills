@@ -24,3 +24,4 @@ skills/motion-film/example/storyboard/
 
 # HyperFrames local state
 .hyperframes/
+!docs/media/*.mp4

@@ -5,6 +5,16 @@ built as code — real footage and photos, hand-drawn animated graphics, kinetic
 real-recorded sound mix — rendered with [HyperFrames](https://github.com/heygen-com/hyperframes) to MP4, with
 storyboards, shorter cut-downs and delivery checks along the way. It works for any subject, brand, length or aspect ratio.
 
+## Demo
+
+[![The 20-second demo film made with the kit](docs/media/demo.webp)](docs/media/demo.mp4)
+
+A 20-second film for a fictional organisation, built entirely by the `motion-film` kit: hand-drawn illustrations with
+edge boil, kinetic titles, a counter, a Three.js particle beam, a texture transition, a 3D map with routes and labels, and
+a burst into the end card, with a mixed and mastered soundtrack. Click the preview for the
+[MP4 with sound](docs/media/demo.mp4) (the demo's audio is a synthesised placeholder; real films use licensed recordings).
+Rebuild it yourself from `skills/motion-film/example/`.
+
 ## Install
 
 Needs git, Python 3.10+, Node 18+ and FFmpeg 6.1+.
