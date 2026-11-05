@@ -39,7 +39,7 @@ if (-not $NoUpstream) {
   $three = Fetch "threejs-skills"
   Get-ChildItem "$three\skills" -Directory | ForEach-Object {
     $d = Replace-Skill $_.Name; Copy-Item $_.FullName $d -Recurse; Write-Host "    $($_.Name)" }
-  Fetch "earshot" | Out-Null; Fetch "clipwing" | Out-Null
+  Fetch "earshot" | Out-Null; Fetch "clipwing" | Out-Null; Fetch "ffmpeg-skill" | Out-Null
   $cli = ($Manifest.upstream | Where-Object name -eq "hyperframes").cli
   Push-Location (Split-Path $Target)
   try { npx --yes $cli skills update } catch { Write-Host "  ! run 'npx hyperframes skills update' yourself" }

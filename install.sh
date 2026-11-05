@@ -37,7 +37,7 @@ if [ "$UPSTREAM" = 1 ]; then
   echo "== third-party skills (pinned)"
   fetch threejs-skills
   for d in "$SRC_DIR/threejs-skills/skills"/*/; do n=$(basename "$d"); replace "$n"; cp -r "$d". "$TARGET/$n/"; echo "    $n"; done
-  fetch earshot; fetch clipwing
+  fetch earshot; fetch clipwing; fetch ffmpeg-skill
   echo "  hyperframes skills (via its CLI)"
   (cd "$TARGET/.." && npx --yes "$(pin hyperframes cli)" skills update) || echo "  ! run 'npx hyperframes skills update' yourself"
   echo "  earshot's Python environment (~1.1 GB of models) is set up on first use by the earshot skill."

@@ -37,7 +37,7 @@ The optional `llm` critique sends audio to Gemini and needs `GEMINI_API_KEY` in 
 
 Read `$SRC/skills/earshot/SKILL.md` in full and follow it exactly - its commands (`measure`, `describe`, `match`, `rank`, `find`, `compare`, `ab`, `realness`, `timeline`, `sheet`, `critique`, `forge`, `sfx`, `kit`) and its rule: never say how audio sounds without an earshot reading behind it, and quote the number.
 
-For building a full film soundtrack from real licensed recordings, follow the `motion-film` skill's `references/sound.md`; earshot is how you check every step of it.
+For building a full soundtrack from real licensed recordings, use the companion `real-sound` skill (same install) or the `motion-film` skill's `references/sound.md`; earshot is how you check every step.
 
 ## Rules
 

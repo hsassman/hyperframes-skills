@@ -44,6 +44,24 @@ Record `file, title, author, url, licence` for every download in `sources.json` 
 | ChatGPT image generation (or another image model) | textures and effects on black: smoke, clouds, splashes, bursts, paper, fabric | Never for text, logos, products or real people; cut out with `kit/assets/prep.py` |
 | [Pexels](https://www.pexels.com/api/) and [Pixabay](https://pixabay.com/api/docs/) APIs | licensed stock video and photos when the subject has none | Free keys; keep a licence note per file |
 
+## Voice-over and captions (optional)
+| Tool | Used for | Notes |
+|---|---|---|
+| [Qwen TTS](https://github.com/QwenLM) (self-hosted) | narration from a script, chunked and stitched (`qwen-tts-voiceover` skill) | Runs on your own server |
+| [DeepFilterNet](https://github.com/Rikorose/DeepFilterNet) | denoising recorded or generated voice (`audio-mastering` skill) | MIT / Apache-2.0 |
+| [WhisperX](https://github.com/m-bain/whisperX) | word-level timings and captions (`caption-sync` skill) | BSD-2 |
+
+## Companion skills and what they cover
+| Skill | Phase |
+|---|---|
+| `hyperframes`, `hyperframes-cli`, `hyperframes-registry`, `media-use` | composition, render, ready-made blocks |
+| `threejs-*` | 3D technique |
+| `script-structure` | brief and beat sheet |
+| `stock-footage-sourcer` | licensed stock (Pexels, Pixabay APIs) |
+| `ffmpeg-processor`, `ffmpeg-skill` | media prep, edits, exports |
+| `real-sound`, `real-sfx`, `openverse-audio`, `earshot` | sound sourcing, placement, measurement |
+| `audio-mastering`, `qwen-tts-voiceover`, `caption-sync` | voice-over, loudness, captions |
+
 ## Review and delivery
 | Tool | Used for |
 |---|---|

@@ -1,8 +1,9 @@
 # Sound: music edit, effects, mix, master
 
 Real recordings only. Synthesised whooshes and beeps make code-made films feel fake. Sources, APIs and licences are listed
-in `references/tools-and-sources.md`; the `earshot` skill measures and compares audio you can't hear, and `real-sfx`
-places effects frame-accurately from a look at the picture.
+in `references/tools-and-sources.md`. Companion skills: `real-sound` (the same process in more depth), `openverse-audio`
+(search and download with licence filtering), `real-sfx` (frame-accurate placement from a look at the picture),
+`earshot` (measure and compare audio you can't hear), `audio-mastering` (denoise and loudness for voice tracks).
 
 ## 1. Music first
 - Choose a licensed track that fits the pace and mood (it decides the film's rhythm; most brand and explainer films sit at
@@ -14,8 +15,8 @@ places effects frame-accurately from a look at the picture.
 - Time the picture to the music: beat starts on bars, payoff on the biggest hit, end card on the resolution.
 
 ## 2. Source effects
-Search the libraries in `references/tools-and-sources.md` (Pixabay sound effects first; Freesound and Openverse when
-Pixabay has nothing that fits). Download through a browser when the shell's network is restricted. **Record every file at
+Search the libraries in `references/tools-and-sources.md` (Pixabay sound effects first; Freesound and Openverse — via the
+`openverse-audio` skill — when Pixabay has nothing that fits). Download through a browser when the shell's network is restricted. **Record every file at
 download time** in `sources.json` (`file, title, author, url, licence`).
 
 Build the list from what is on screen, not from a template: every reveal, draw-on, landing, count, transition and scene

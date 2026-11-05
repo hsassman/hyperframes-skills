@@ -23,9 +23,15 @@ Kit (in this skill folder):
 - `kit/storyboard/build_storyboard.py` — storyboard page built from real frames of the composition.
 - `example/` — a runnable 20 s demo that uses every piece. Start here: `example/setup.sh`, then read `example/gen.py`.
 
-Companion skills (installed by this repo's installer): `hyperframes` and `hyperframes-cli` (render contract — read first
-when writing composition code), `threejs-*` (3D technique), `earshot` (measuring audio), `real-sfx` (frame-accurate
-effect placement). Every tool, library, API and content source is listed in `references/tools-and-sources.md`.
+Companion skills (installed by this repo's installer):
+- Composition: `hyperframes`, `hyperframes-cli` (render contract — read first when writing composition code), `threejs-*`.
+- Story and media: `script-structure` (beat sheets and scoring), `stock-footage-sourcer` (licensed stock when there is no
+  own footage), `ffmpeg-processor` / `ffmpeg-skill` (media prep and edits).
+- Sound: `real-sound` (full soundtrack from real recordings), `real-sfx` (frame-accurate effects), `openverse-audio`
+  (licensed effects and music), `earshot` (measuring audio), `audio-mastering` (denoise + loudness).
+- Voice-over: `qwen-tts-voiceover` (narration), `caption-sync` (word timings and captions).
+
+Every tool, library, API and content source is listed in `references/tools-and-sources.md`.
 
 ## The workflow (phases and gates)
 

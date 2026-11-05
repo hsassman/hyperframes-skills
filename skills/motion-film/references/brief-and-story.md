@@ -26,7 +26,7 @@ Every kind of film uses the same spine, with different beats in the middle:
 - **Payoff:** the strongest proof or moment (a number, a map, a montage, the product hero) on the music's biggest hit.
 - **Close:** logo + line, or the call to action. Hold ≥ 2.5 s after the last element lands, then fade.
 
-Check the beat sheet before building: Does the hook land in the first line? Is the setup one beat or less? Does every
+Check the beat sheet before building (the `script-structure` skill has the full scoring rubric): Does the hook land in the first line? Is the setup one beat or less? Does every
 beat answer or open a question? Do lengths vary? Is the payoff explicit and tied to the hook? Is the close short and after
 the payoff? Fix the weakest answer first.
 
@@ -35,5 +35,6 @@ Pick the music before timing anything (`references/sound.md` §1). At 120 BPM a 
 bar line, land titles on downbeats, and place the payoff on the strongest phrase start. Write the beat sheet as a table:
 `start | length | beat | media | graphic | annotation | transition out | sound idea`.
 
-With a voice-over, record or generate it first, measure word timings, and put beats on the sentences instead of the bars;
+With a voice-over, record or generate it first (`qwen-tts-voiceover`), master it (`audio-mastering`), measure word timings
+(`caption-sync`), and put beats on the sentences instead of the bars;
 the music is then edited under the voice.

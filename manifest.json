@@ -2,8 +2,17 @@
   "$comment": "Skills shipped in this repo (skills/) plus third-party skills installed from source at pinned commits. Bump a pin here and in the wrapper SKILL.md that names it, then re-run the installer.",
   "local": [
     "motion-film",
+    "script-structure",
+    "stock-footage-sourcer",
+    "ffmpeg-processor",
+    "audio-mastering",
+    "caption-sync",
+    "qwen-tts-voiceover",
+    "openverse-audio",
     "earshot",
-    "real-sfx"
+    "real-sound",
+    "real-sfx",
+    "ffmpeg-skill"
   ],
   "upstream": [
     {
@@ -28,7 +37,8 @@
       "licence": "MIT",
       "install": "wrapper skill clones it on first use",
       "used_by": [
-        "earshot"
+        "earshot",
+        "real-sound"
       ]
     },
     {
@@ -39,6 +49,16 @@
       "install": "wrapper skill clones it on first use",
       "used_by": [
         "real-sfx"
+      ]
+    },
+    {
+      "name": "ffmpeg-skill",
+      "repo": "https://github.com/kajisho5/ffmpeg-skill",
+      "commit": "1ce2c186bf1dba96132d87274eee46df4f537e0e",
+      "licence": "MIT",
+      "install": "wrapper skill clones it on first use",
+      "used_by": [
+        "ffmpeg-skill"
       ]
     }
   ]

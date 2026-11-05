@@ -28,8 +28,17 @@ and keep their own licences.
 | Skill | Source | What it does |
 |---|---|---|
 | **motion-film** | this repo | The workflow: brief → media → story on the music's bar grid → composition → storyboard review → sound → render → QA → cut-downs → delivery. Ships the `kit/` (composition builder, Three.js layers, map geography, hand-drawn illustration builder, asset prep, mixer, mastering, cut-downs, QA, storyboard builder) and a runnable 20 s demo. |
+| script-structure | this repo | Hook / setup / beats / payoff structure and a scoring rubric for scripts and beat sheets. |
+| stock-footage-sourcer | this repo | Licensed stock footage from the Pexels and Pixabay APIs, with a licence file per clip. |
+| ffmpeg-processor | this repo | Probing, trimming, joining, transcoding, muxing and export settings with FFmpeg. |
+| audio-mastering | this repo | Denoise (DeepFilterNet), then two-pass loudness normalisation to −14 LUFS / −1 dBTP. |
+| caption-sync | this repo | Word-level captions and timings with WhisperX (SRT + JSON). |
+| qwen-tts-voiceover | this repo | Chunked, stitched voice-over from a self-hosted Qwen TTS service. |
+| openverse-audio | this repo | Openly licensed sound effects and music from the Openverse API, with attribution. |
 | earshot | wrapper → [Leonxlnx/earshot](https://github.com/Leonxlnx/earshot) | Measures, ranks and compares audio so the agent can judge sound it can't hear. |
+| real-sound | wrapper → [Leonxlnx/earshot](https://github.com/Leonxlnx/earshot) | Builds a full soundtrack from real licensed recordings: cue list, sourcing, music edit, mix, QA, master, credits. |
 | real-sfx | wrapper → [Clipwing/skills](https://github.com/Clipwing/skills) | Looks at a rendered film and places real recorded effects on the exact frames. |
+| ffmpeg-skill | wrapper → [kajisho5/ffmpeg-skill](https://github.com/kajisho5/ffmpeg-skill) | 42 FFmpeg editing tools: cut, join, reframe, captions, silence, loudness, platform exports. |
 | hyperframes, hyperframes-cli, hyperframes-registry, media-use | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) via its CLI | The HyperFrames render contract, CLI, block registry and media helpers. |
 | threejs-* | [CloudAI-X/threejs-skills](https://github.com/CloudAI-X/threejs-skills) | Three.js technique: scenes, geometry, materials, lighting, shaders, post-processing, performance and more. |
 
@@ -47,6 +56,7 @@ The full list, with licences, is in
   API, filter for CC0/CC BY), Openverse API (no key needed).
 - **Images and footage:** the subject's own media first; an image model (e.g. ChatGPT image generation) for textures and
   effects only; Pexels and Pixabay APIs for licensed stock when there is no own media.
+- **Voice-over (optional):** self-hosted Qwen TTS, DeepFilterNet denoising, WhisperX word timings.
 - **Review:** storyboard pages published as Claude artifacts.
 
 ## Using it
@@ -60,8 +70,8 @@ To see every tool work before using your own media:
 ```bash
 cd ~/.claude/skills/motion-film/example && ./setup.sh && npx hyperframes preview
 ```
-See [`docs/workflow.md`](docs/workflow.md) for the pipeline at a glance and
-[`docs/adding-a-skill.md`](docs/adding-a-skill.md) to add a new skill.
+The phases and their gates are in [`skills/motion-film/SKILL.md`](skills/motion-film/SKILL.md); to add a new skill to this
+repo, see [`docs/adding-a-skill.md`](docs/adding-a-skill.md).
 
 ## Licence
 
