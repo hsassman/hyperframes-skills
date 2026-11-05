@@ -45,7 +45,7 @@ if "--demo" in sys.argv:
 
 ev = json.load(open(os.path.join(HERE, "events.json")))
 mx = Mix(MUSIC, TOTAL, libs=[SFX])
-# 1) cues straight from picture events (draw-ons, stickers, titles, wipes, slams, bursts)
+# 1) cues straight from picture events (draw-ons, stickers, titles, wipes, panels, textures, bursts, counters)
 for e in ev:
     k = e["kind"]
     if k == "draw_start":
@@ -56,10 +56,12 @@ for e in ev:
         mx.place("click.wav", e["t"], "click", db=-3, note=f"title {e['note']}")
     elif k in ("wipe", "rise", "burst", "whip"):
         mx.place("whoosh.wav", 0, "whoosh", peak_at=e["t"], note=k)
-    elif k == "slam":
-        mx.place("thump.wav", e["t"], "door", note="shutter slams")
-    elif k == "roll_up":
-        mx.place("whoosh.wav", e["t"], "rattle", dur=0.7, fade_out=0.3, note="shutter rolls up")
+    elif k == "panel_down":
+        mx.place("thump.wav", e["t"], "impact", note="panel lands")
+    elif k == "panel_up":
+        mx.place("whoosh.wav", e["t"], "whoosh", dur=0.7, fade_out=0.3, note="panel lifts")
+    elif k in ("texture_in", "texture_out"):
+        mx.place("whoosh.wav", 0, "whoosh", peak_at=e["t"] + 0.3, db=-4, note=f"{k} {e['note']}")
     elif k == "count":
         a, b = (int(v) for v in e["note"].split("->")); n = min(24, b - a)
         mx.ticks("click.wav", [e["t"] + 1.4 * (1 - (1 - i / n) ** 0.5) for i in range(n)], note="counter")

@@ -4,18 +4,18 @@
 
 spec.json:
 {
-  "title": "From seed to cup", "eyebrow": "Brand · process film · v1 storyboard",
+  "title": "Northwind demo", "eyebrow": "Brand film · v1 storyboard",
   "lede": "Every frame is a still pulled from the composition. Approve it or say which frames to change.",
   "meta": ["20 s · 1920×1080 · 30 fps", "Music: ...", "No voice-over"],
   "chapters": [
     {"num": "00", "name": "Seed", "span": "0:00 – 0:06",
      "frames": [{"t": 1.2, "title": "Hook", "text": "What happens and why.", "sound": "soft wind", "transition": false, "badge": "New"}]}
   ],
-  "notes": ["Anything the client must confirm."]
+  "notes": ["Anything the reviewer must confirm."]
 }
 Frames are snapshotted with the HyperFrames CLI (needs Chrome; set PRODUCER_HEADLESS_SHELL_PATH on Linux), saved as
 1280×720 JPEGs, and index.html is self-contained apart from frames/. Publish the folder as a page (e.g. a Claude artifact
-with the frames as supporting files) so the client can review on a phone."""
+with the frames as supporting files) so reviewers can check it on a phone."""
 import argparse, glob, html, json, os, shutil, subprocess
 
 CSS = """

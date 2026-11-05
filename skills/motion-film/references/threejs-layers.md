@@ -18,13 +18,21 @@ UnrealBloomPass → OutputPass) and `Line2` fat lines work in the bundle.
 
 ## Layers provided
 - `FILM3D.particles(canvasId, {start,end,count,size,color,seed,drift,focus,fadeIn,fadeOut,beam,shape,sprite})` —
-  dust in a light beam, snow, sparks, crystals; depth-of-field via point size and alpha.
-- `FILM3D.map(canvasId, {...})` — the country from `assets/geo.js` extruded with bevels, neighbours flat, a hand-drawn
-  coastline that boils at 10 fps, routes (tubes with a travelling head and packets) from `home` to `cities` (each with an
-  `at` time and an HTML label id positioned every frame), pins that pop, a camera that descends from above
-  (`highStart`), settles into a tilted orbit and pushes into home at the end (`pushIn`), `viewShift` to free screen
-  space for text, and `follow` to pin an HTML element (e.g. a burst) to home's screen position.
-  Generate geography: `node geo.mjs --main <ISO numeric> [--insets ...] [--neighbours ...] [--bbox ...] --out assets/geo.js`.
+  dust in a light beam, sparks, snow, bubbles, stars; depth-of-field via point size and alpha.
+- `FILM3D.map(canvasId, {...})` — any country or region from `assets/geo.js`, extruded with bevels, neighbours flat, a
+  hand-drawn coastline that boils at 10 fps, and routes (tubes with a travelling head) from an origin (`home`) to any
+  number of destinations (`cities`, each with an `at` time and an HTML label id positioned every frame). Pins pop on
+  arrival; the camera descends from above (`highStart`), settles into a tilted orbit and pushes into the origin at the end
+  (`pushIn`); `viewShift` frees screen space for text; `follow` pins an HTML element (e.g. a burst) to the origin on
+  screen; `colors` overrides the palette. Use it for offices, customers, venues, sources, journeys, coverage — anything
+  with a where. Generate geography:
+  `node geo.mjs --main <ISO numeric> [--insets ...] [--neighbours ...] [--bbox ...] --out assets/geo.js`.
+- The canvas size follows the composition (`Film(width, height)`), so the same layers work in vertical films.
+
+**Writing a new layer** (globe, product turntable, data bars, a logo in 3D): add a function to `kit/node/src/film3d.js`
+that builds the scene once and exposes `render(t)` as a pure function of t, push it onto `layers`, add it to
+`window.FILM3D`, rebuild with
+`npm run build:3d`, and call it from `film.init3d(...)`.
 
 ## Performance
 Software WebGL (headless Linux, no GPU) is slow: keep shadow maps ≤ 2048, one composer per canvas, particles ≤ 1500,

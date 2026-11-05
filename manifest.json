@@ -1,19 +1,45 @@
 {
   "$comment": "Skills shipped in this repo (skills/) plus third-party skills installed from source at pinned commits. Bump a pin here and in the wrapper SKILL.md that names it, then re-run the installer.",
   "local": [
-    "motion-film", "script-structure", "stock-footage-sourcer", "ffmpeg-processor", "audio-mastering",
-    "caption-sync", "qwen-tts-voiceover", "openverse-audio", "earshot", "real-sound", "real-sfx", "ffmpeg-skill"
+    "motion-film",
+    "earshot",
+    "real-sfx"
   ],
   "upstream": [
-    {"name": "threejs-skills", "repo": "https://github.com/CloudAI-X/threejs-skills", "commit": "0e181866f095b5f06d005133876e926515390d95",
-     "licence": "MIT", "install": "copy skills/* into the skills folder"},
-    {"name": "hyperframes", "repo": "https://github.com/heygen-com/hyperframes", "commit": "060e6e4a125b33c2801e9c2f96f2ff35ee2e418e",
-     "licence": "see upstream", "install": "npx hyperframes skills update", "cli": "hyperframes@0.8.185"},
-    {"name": "earshot", "repo": "https://github.com/Leonxlnx/earshot", "commit": "591fa3e028032e6dce56620a20e932e35667e8d8",
-     "licence": "MIT", "install": "wrapper skill clones it on first use", "used_by": ["earshot", "real-sound"]},
-    {"name": "clipwing", "repo": "https://github.com/Clipwing/skills", "commit": "edbefcbc3474869e6cc1e8a7ca583b0efd0dab7e",
-     "licence": "MIT (bundled sounds CC0)", "install": "wrapper skill clones it on first use", "used_by": ["real-sfx"]},
-    {"name": "ffmpeg-skill", "repo": "https://github.com/kajisho5/ffmpeg-skill", "commit": "1ce2c186bf1dba96132d87274eee46df4f537e0e",
-     "licence": "MIT", "install": "wrapper skill clones it on first use", "used_by": ["ffmpeg-skill"]}
+    {
+      "name": "threejs-skills",
+      "repo": "https://github.com/CloudAI-X/threejs-skills",
+      "commit": "0e181866f095b5f06d005133876e926515390d95",
+      "licence": "MIT",
+      "install": "copy skills/* into the skills folder"
+    },
+    {
+      "name": "hyperframes",
+      "repo": "https://github.com/heygen-com/hyperframes",
+      "commit": "060e6e4a125b33c2801e9c2f96f2ff35ee2e418e",
+      "licence": "see upstream",
+      "install": "npx hyperframes skills update",
+      "cli": "hyperframes@0.8.185"
+    },
+    {
+      "name": "earshot",
+      "repo": "https://github.com/Leonxlnx/earshot",
+      "commit": "591fa3e028032e6dce56620a20e932e35667e8d8",
+      "licence": "MIT",
+      "install": "wrapper skill clones it on first use",
+      "used_by": [
+        "earshot"
+      ]
+    },
+    {
+      "name": "clipwing",
+      "repo": "https://github.com/Clipwing/skills",
+      "commit": "edbefcbc3474869e6cc1e8a7ca583b0efd0dab7e",
+      "licence": "MIT (bundled sounds CC0)",
+      "install": "wrapper skill clones it on first use",
+      "used_by": [
+        "real-sfx"
+      ]
+    }
   ]
 }

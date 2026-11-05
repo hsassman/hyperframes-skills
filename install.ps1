@@ -21,7 +21,7 @@ Write-Host "== skills from this repo -> $Target"
 Get-ChildItem "$Root\skills" -Directory | ForEach-Object {
   $src = $_.FullName; $dst = Replace-Skill $_.Name
   $ex = "$src\example"
-  $xd = @("node_modules", "__pycache__", "$ex\assets", "$ex\renders", "$ex\audio", "$ex\music", "$ex\sfx", "$ex\storyboard")
+  $xd = @("node_modules", "__pycache__", ".hyperframes", "$ex\assets", "$ex\renders", "$ex\audio", "$ex\music", "$ex\sfx", "$ex\storyboard")
   robocopy $src $dst /E /NFL /NDL /NJH /NJS /XD $xd /XF "$ex\index.html" "$ex\events.json" | Out-Null
   if ($LASTEXITCODE -ge 8) { throw "copy failed for $($_.Name)" }
   Write-Host "  $($_.Name)" }
@@ -39,7 +39,7 @@ if (-not $NoUpstream) {
   $three = Fetch "threejs-skills"
   Get-ChildItem "$three\skills" -Directory | ForEach-Object {
     $d = Replace-Skill $_.Name; Copy-Item $_.FullName $d -Recurse; Write-Host "    $($_.Name)" }
-  Fetch "earshot" | Out-Null; Fetch "clipwing" | Out-Null; Fetch "ffmpeg-skill" | Out-Null
+  Fetch "earshot" | Out-Null; Fetch "clipwing" | Out-Null
   $cli = ($Manifest.upstream | Where-Object name -eq "hyperframes").cli
   Push-Location (Split-Path $Target)
   try { npx --yes $cli skills update } catch { Write-Host "  ! run 'npx hyperframes skills update' yourself" }

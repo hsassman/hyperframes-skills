@@ -13,7 +13,7 @@ Snapshot the busiest frame of each beat and the middle of each transition; read 
 - [ ] No image or overlay edge visible (scaled below frame size, rectangles around cut-outs, grey bands at frame edges).
 - [ ] No leftovers from the previous chapter floating over the next (stickers, arrows, labels).
 - [ ] Text never overlaps busy imagery without a scrim; contrast holds on the actual ground.
-- [ ] Colour transitions don't pass through mud (orange → teal in RGB goes brown: snap the change at a meaningful moment).
+- [ ] Colour transitions don't pass through mud (complementary colours cross-faded in RGB go grey-brown: snap the change at a meaningful moment).
 
 **Motion**
 - [ ] Each transition is motivated and not repeated within ~20 s.
@@ -22,8 +22,8 @@ Snapshot the busiest frame of each beat and the middle of each transition; read 
 
 **Taste**
 - [ ] Annotation density: one loop/circle per film at most; arrows and stickers preferred; solid lines over dotted.
-- [ ] Client taste rules from previous rounds are all respected.
+- [ ] Taste rules from previous review rounds are all respected.
 
 **Facts and brand**
-- [ ] Every number, claim, place name comes from the brief or is marked `[CONFIRM]`.
+- [ ] Every number, claim, name and place comes from the brief or is marked `[CONFIRM]`.
 - [ ] Logos are the real files, never redrawn; no generated text anywhere.

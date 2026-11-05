@@ -18,7 +18,7 @@ project/
 - Type: `title` (chip + headline rise/letters/blur + sub line), `counter`.
 - Drawn: `illo` (hero illustration from `illos.json`), `arrow`, `note` (hand or sticker), `brace`, `underline`, `loop`,
   `process_line` — all edge-boiled.
-- Transitions: `band_wipe`, `whip`, `texture_cover`, `shutter`, `cloud_pass`, `burst` (can follow a map point), `fade_out`.
+- Transitions: `band_wipe`, `whip`, `texture_cover`, `panel_wipe`, `cloud_pass`, `burst` (can follow a map point), `fade_out`.
 - 3D: `film.init3d("FILM3D.particles(...)")` / `FILM3D.map(...)` on a `canvas3d`.
 - Every helper records picture events (`film.event`) → `events.json`, which the sound pass uses.
 
@@ -30,7 +30,8 @@ project/
   chapter's content appears, or old stickers float over new scenes.
 - **Fill the frame:** 2–3 media windows + an illustration + title per chapter; avoid big empty areas. Use giant outline words
   and pre-rendered grounds for colour and depth.
-- **Safe areas:** titles top-left at x≈130, y≈140–150; nothing important within 60 px of edges.
+- **Safe areas:** titles top-left at x≈130, y≈140–150 in 16:9; nothing important within 60 px of edges. In 9:16 keep text
+  in the middle 70 % of the height (platform UI covers the top and bottom) and stack media vertically.
 - **Never** let an oversized image or overlay scale below the frame size (edges show). Keep cover-type overlays ≥ 1.04×.
 
 ## Grounds

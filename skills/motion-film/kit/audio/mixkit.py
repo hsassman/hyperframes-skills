@@ -20,11 +20,12 @@ import numpy as np
 import soundfile as sf
 
 SR = 48000
-ROLE = {"whoosh": -7, "swish": -10, "marker": -13, "paper": -10, "pop": -8, "click": -14, "chime": -9, "box": -5, "tape": -7,
-        "amb": -15, "riser": -9, "truck": -13, "pencil": -13, "door": -6, "rattle": -7, "ice": -10, "flour": -9, "tick": -15,
-        "wind": -13, "handling": -15, "impact": -6, "ui": -12}
-CAP = {"door": -4.0, "whoosh": -5.0, "tape": -5.0, "box": -6.0, "flour": -6.0, "riser": -6.0, "rattle": -7.0, "impact": -4.0,
-       "tick": -16.0, "pop": -9.0, "amb": -14.0, "wind": -10.0, "ice": -10.0}
+# Roles by what a sound does in the film. Targets in dB vs the music around the cue; caps are sample-peak ceilings (dBFS).
+ROLE = {"whoosh": -7, "swish": -10, "riser": -9, "impact": -6, "hit": -5, "mechanical": -6, "pop": -8, "click": -14,
+        "ui": -12, "tick": -15, "chime": -9, "paper": -10, "pencil": -13, "marker": -13, "foley": -7, "handling": -15,
+        "texture": -10, "amb": -15, "air": -13}
+CAP = {"whoosh": -5.0, "riser": -6.0, "impact": -4.0, "hit": -4.0, "mechanical": -4.0, "foley": -5.0, "texture": -8.0,
+       "pop": -9.0, "tick": -16.0, "amb": -14.0, "air": -10.0}
 
 
 def decode(path, hp=None, lp=None, sr=SR):

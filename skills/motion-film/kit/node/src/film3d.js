@@ -3,8 +3,8 @@
 // time, requestAnimationFrame or the previous frame.
 //
 // Layers:
-//   FILM3D.particles(canvasId, opts)  dust / snow / sparks / crystals (optional sprite texture)
-//   FILM3D.map(canvasId, opts)        extruded country with hand-drawn boiling coastline, routes from a home point,
+//   FILM3D.particles(canvasId, opts)  dust, sparks, snow, bubbles, stars (optional sprite texture)
+//   FILM3D.map(canvasId, opts)        extruded country/region with a hand-drawn boiling coastline, routes from an origin,
 //                                     pins, labels, descent / orbit / push-in camera and a screen-space follower element
 // Geography comes from window.FILM_GEO (written by geo.mjs into assets/geo.js).
 import * as THREE from 'three';
@@ -16,9 +16,8 @@ import { Line2 } from 'three/examples/jsm/lines/Line2.js';
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js';
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js';
 
-const W = 1920, H = 1080;
-const DEF = { land: '#3A8FA3', side: '#173F4A', neighbour: '#2C6673', ground: '#163E47', bg: ['#2E7F91', '#123640', '#08171C'],
-  fog: '#123640', route: '#E8743B', routeStart: '#FFE3CC', coast: '#FAF6F0', pin: '#E8743B', home: '#FFFFFF' };
+const DEF = { land: '#5E7A94', side: '#2B3B4A', neighbour: '#3D5266', ground: '#26333F', bg: ['#45607A', '#1E2A35', '#0D141A'],
+  fog: '#1E2A35', route: '#F0A33A', routeStart: '#FFE2B0', coast: '#F7F5F0', pin: '#F0A33A', home: '#FFFFFF' };
 function mulberry32(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -39,7 +38,7 @@ function ready(key, promise) { window.__hf = window.__hf || {}; window.__hf.buil
 // opts: start, end, count, size, color, seed, drift:[x,y,z], focus, fadeIn, fadeOut, additive, shape (0 soft dot, 1 star crystal),
 //       beam (light shaft), sprite (image url, luminance = alpha), timeOffset, alphaAt(t)
 function particles(canvasId, o) {
-  const canvas = document.getElementById(canvasId);
+  const canvas = document.getElementById(canvasId), W = canvas.width || 1920, H = canvas.height || 1080;
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: false, preserveDrawingBuffer: true, premultipliedAlpha: true });
   renderer.setPixelRatio(1); renderer.setSize(W, H, false); renderer.setClearColor(0x000000, 0);
   const scene = new THREE.Scene();
@@ -141,7 +140,7 @@ function map(canvasId, o) {
     for (let i = 1; i < rings.length; i++) sh.holes.push(new THREE.Path(rings[i].map(([lo, la]) => new THREE.Vector2(PX(lo), -PZ(la)))));
     return sh;
   };
-  const canvas = document.getElementById(canvasId);
+  const canvas = document.getElementById(canvasId), W = canvas.width || 1920, H = canvas.height || 1080;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, preserveDrawingBuffer: true });
   renderer.setPixelRatio(1); renderer.setSize(W, H, false);
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -202,7 +201,7 @@ function map(canvasId, o) {
       }`,
   };
   const pinMat = new THREE.MeshStandardMaterial({ color: col.pin, roughness: 0.35, emissive: col.pin, emissiveIntensity: 0.35 });
-  const stemMat = new THREE.MeshStandardMaterial({ color: '#FAF6F0', roughness: 0.6 });
+  const stemMat = new THREE.MeshStandardMaterial({ color: '#F7F5F0', roughness: 0.6 });
   (o.cities || []).forEach((c) => {
     const end = P3(c.ll); const dist = home3.distanceTo(end);
     const mid = home3.clone().lerp(end, 0.5); mid.y += 0.45 + dist * 0.22;

@@ -44,7 +44,7 @@ python scripts/setup.py init --library main="<sfx folder>" --uisfx --index
 python scripts/setup.py check
 ```
 
-No library yet: `--uisfx` alone gives 78 CC0 UI cues; for whooshes, hits and foley, suggest the `openverse-audio` skill to source licensed recordings into a folder first, then add it with `python scripts/setup.py add-library <name> "<folder>" --tier main --index`.
+No library yet: `--uisfx` alone gives 78 CC0 UI cues; for whooshes, hits and foley, source licensed recordings into a folder first (Pixabay sound effects, Freesound or Openverse — see the `motion-film` skill's `references/tools-and-sources.md`), then add it with `python scripts/setup.py add-library <name> "<folder>" --tier main --index`.
 
 ## 3. Hand over
 

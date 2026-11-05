@@ -14,7 +14,7 @@ Model
 * Three.js layers render from timeline time via the hf-seek event (see kit/node/src/film3d.js); register them with
   film.init3d("FILM3D.particles('cv',{...})").
 
-All coordinates are 1920x1080 px. Times are seconds. Colours come from the Theme.
+Default frame is 1920x1080 px (Film(width=1080, height=1920) for vertical); all coordinates are in frame pixels. Times are seconds. Colours come from the Theme.
 """
 import json, math, os
 from dataclasses import dataclass, field
@@ -22,14 +22,14 @@ from dataclasses import dataclass, field
 
 @dataclass
 class Theme:
-    bg: str = "#0F2A33"        # deepest brand colour: root background, map fog, fade-out
-    ink: str = "#1F2A30"       # outlines and reading text on light grounds
-    paper: str = "#FAF6F0"     # light neutral: frames, stickers, text on dark grounds
-    accent: str = "#E8743B"    # display accent: arrows, chips, counters (never small body text)
-    accent2: str = "#2BA3B8"   # second display colour
-    display: str = "Poppins"   # headline font family
+    bg: str = "#16202A"        # deepest brand colour: root background, map fog, fade-out
+    ink: str = "#1C2228"       # outlines and reading text on light grounds
+    paper: str = "#F7F5F0"     # light neutral: frames, stickers, text on dark grounds
+    accent: str = "#F0A33A"    # display accent: arrows, chips, counters (never small body text)
+    accent2: str = "#4C7DF0"   # second display colour
+    display: str = "Archivo"   # headline font family (needs weights 700/800)
     body: str = "Inter"        # body/label font family
-    hand: str = "Caveat"       # handwritten accent font family (short notes only)
+    hand: str = "Kalam"        # handwritten accent font family (short notes only)
     font_faces: list = field(default_factory=list)   # [(family, weight, "assets/fonts/x.woff2"), ...]
 
 
@@ -114,7 +114,7 @@ class Film:
         wd = f'<div class="giant" id="{gid}_w" style="top:{word_y}px;-webkit-text-stroke:4px {word_col}">{word}</div>' if word else ""
         src = img if "." in img else f"{img}.jpg"
         self.H.append(f'<div id="{gid}" class="clip" data-start="{f(start)}" data-duration="{f(dur)}" style="z-index:{z};overflow:hidden;background:{bg or self.th.bg}">'
-                      f'<img id="{gid}_i" src="assets/{src}" alt="" style="position:absolute;left:-96px;top:-54px;width:2112px;height:1188px">{wd}{extra}</div>')
+                      f'<img id="{gid}_i" src="assets/{src}" alt="" style="position:absolute;left:{-self.W * 0.05:.0f}px;top:{-self.Hpx * 0.05:.0f}px;width:{self.W * 1.1:.0f}px;height:{self.Hpx * 1.1:.0f}px">{wd}{extra}</div>')
         dx, dy = (self.rnd() - .5) * 90, (self.rnd() - .5) * 50
         self.T(f"tl.fromTo('#{gid}_i',{{x:0,y:0,scale:1}},{{x:{dx:.0f},y:{dy:.0f},scale:1.045,duration:{f(dur)},ease:'sine.inOut'}},{f(start)});")
         if word:
@@ -125,7 +125,7 @@ class Film:
 
     def canvas3d(self, cid, start, dur, z):
         self.H.append(f'<div id="{cid}_c" class="clip" data-start="{f(start)}" data-duration="{f(dur)}" style="z-index:{z};pointer-events:none">'
-                      f'<canvas id="{cid}" width="1920" height="1080" style="position:absolute;inset:0;width:1920px;height:1080px"></canvas></div>')
+                      f'<canvas id="{cid}" width="{self.W}" height="{self.Hpx}" style="position:absolute;inset:0;width:{self.W}px;height:{self.Hpx}px"></canvas></div>')
 
     def raw_clip(self, cid, start, dur, z, inner, style=""):
         self.H.append(f'<div id="{cid}" class="clip" data-start="{f(start)}" data-duration="{f(dur)}" style="z-index:{z};pointer-events:none;{style}">{inner}</div>')
@@ -158,7 +158,7 @@ class Film:
 
     def full_video(self, vid, src, start, dur, mstart=0, z=5):
         self.H.append(f'<video id="{vid}" class="clip" src="assets/{src}" muted playsinline data-start="{f(start)}" data-duration="{f(dur)}" data-media-start="{f(mstart)}" '
-                      f'style="z-index:{z};width:1920px;height:1080px;object-fit:cover"></video>')
+                      f'style="z-index:{z};width:{self.W}px;height:{self.Hpx}px;object-fit:cover"></video>')
 
     def tagbox(self, key, tid, x, y, w, h, text, at, pos="bl"):
         tx, ty = (x + 20, y + h - 58) if pos == "bl" else (x + 20, y + 20) if pos == "tl" else (x + w - 20, y + h - 58)
@@ -212,7 +212,7 @@ class Film:
 
     # -------------------------------------------------------------- drawn annotation (edge-boiled SVG)
     def svg_wrap(self, key, sid, inner, boil="boil"):
-        self.L(key).append(f'<svg id="{sid}" class="ov" width="1920" height="1080" viewBox="0 0 1920 1080" style="filter:url(#{boil})">{inner}</svg>')
+        self.L(key).append(f'<svg id="{sid}" class="ov" width="{self.W}" height="{self.Hpx}" viewBox="0 0 {self.W} {self.Hpx}" style="filter:url(#{boil})">{inner}</svg>')
 
     def draw(self, pid, at, dur, ease="power2.inOut"):
         self.T(f"tl.fromTo('#{pid}',{{attr:{{'stroke-dashoffset':1}}}},{{attr:{{'stroke-dashoffset':0}},duration:{f(dur)},ease:'{ease}'}},{f(at)});")
@@ -310,22 +310,28 @@ class Film:
         self.T(f"tl.fromTo([{n}],{{x:{dist},filter:'blur(18px)'}},{{x:0,filter:'blur(0px)',duration:{dur_in},ease:'power3.out'}},{f(at + dur_out)});")
         self.event(at + dur_out, "whip")
 
-    def texture_cover(self, tid, img, at, hold, z=160, settle_opacity=0.92):
-        """A full-frame texture (e.g. frost, smoke, paper) grows in from beyond the edges and settles; keep scale >= 1.04 so
-        the image edge never shows."""
-        self.raw_clip(tid, at, hold, z, f'<img id="{tid}_i" src="assets/{img}" alt="" style="position:absolute;left:0;top:0;width:1920px;height:1080px">')
+    def texture_cover(self, tid, img, at, hold, z=160, settle_opacity=0.92, fade_out=0.0):
+        """A full-frame texture (smoke, paper, fabric, clouds, ink) grows in from beyond the edges and settles; keep scale >= 1.04
+        so the image edge never shows. With fade_out > 0 it clears over that many seconds at the end of `hold`, revealing
+        whatever starts underneath (use it as a transition); without it the texture stays as an overlay until `hold` ends."""
+        self.raw_clip(tid, at, hold, z, f'<img id="{tid}_i" src="assets/{img}" alt="" style="position:absolute;left:0;top:0;width:{self.W}px;height:{self.Hpx}px">')
         self.T(f"tl.fromTo('#{tid}_i',{{opacity:0,scale:1.5}},{{opacity:1,scale:1.04,duration:0.6,ease:'power2.out',transformOrigin:'50% 50%'}},{f(at + 0.03)});")
-        self.T(f"tl.to('#{tid}_i',{{opacity:{settle_opacity},scale:1.13,duration:{f(max(0.5, hold - 0.7))},ease:'sine.out'}},{f(at + 0.65)});")
+        settle = max(0.3, hold - 0.68 - fade_out)
+        self.T(f"tl.to('#{tid}_i',{{opacity:{settle_opacity},scale:1.13,duration:{f(settle)},ease:'sine.out'}},{f(at + 0.65)});")
         self.event(at, "texture_in", img)
+        if fade_out:
+            self.T(f"tl.to('#{tid}_i',{{opacity:0,scale:1.2,duration:{f(fade_out)},ease:'power1.in'}},{f(at + hold - fade_out)});")
+            self.event(at + hold - fade_out, "texture_out", img)
 
-    def shutter(self, tid, img, at, z=178, up_after=0.18):
-        """A panel (roller door, curtain, page) slams down to cover the frame, bounces, then rolls up on the next scene."""
-        self.raw_clip(tid, at, 1.4, z, f'<div id="{tid}_i" style="position:absolute;left:0;top:0;width:1920px;height:1120px;background:url(assets/{img}) center/cover">'
+    def panel_wipe(self, tid, img, at, z=178, up_after=0.18):
+        """A full-frame panel (a door, curtain, wall or page; any texture image) drops to cover the frame, bounces, then
+        lifts away on the next scene."""
+        self.raw_clip(tid, at, 1.4, z, f'<div id="{tid}_i" style="position:absolute;left:0;top:0;width:{self.W}px;height:{self.Hpx + 40}px;background:url(assets/{img}) center/cover">'
                       f'<div style="position:absolute;left:0;top:100%;width:100%;height:110px;background:linear-gradient(rgba(6,14,20,.55),rgba(6,14,20,0))"></div></div>')
-        self.T(f"tl.fromTo('#{tid}_i',{{y:-1140}},{{y:-28,duration:0.4,ease:'power2.in'}},{f(at + 0.06)});")
+        self.T(f"tl.fromTo('#{tid}_i',{{y:-{self.Hpx + 60}}},{{y:-28,duration:0.4,ease:'power2.in'}},{f(at + 0.06)});")
         self.T(f"tl.to('#{tid}_i',{{y:0,duration:0.12,ease:'power1.out'}},{f(at + 0.46)});")
-        self.T(f"tl.to('#{tid}_i',{{y:-1190,duration:0.66,ease:'power2.inOut'}},{f(at + 0.58 + up_after)});")
-        self.event(at + 0.46, "slam"); self.event(at + 0.58 + up_after, "roll_up")
+        self.T(f"tl.to('#{tid}_i',{{y:-{self.Hpx + 110},duration:0.66,ease:'power2.inOut'}},{f(at + 0.58 + up_after)});")
+        self.event(at + 0.46, "panel_down"); self.event(at + 0.58 + up_after, "panel_up")
 
     def cloud_pass(self, tid, img_a, img_b, at, z=176):
         """Camera rises through two cloud layers (tilt up), white flash at the top, clouds clear upwards."""
@@ -342,7 +348,7 @@ class Film:
         self.event(at + 0.5, "rise")
 
     def burst(self, tid, img, at, x=960, y=540, z=97, follow=False):
-        """A burst image (powder, splash, confetti) grows from a point to cover the frame, then blows past. With follow=True
+        """A burst image (splash, confetti, dust, petals) grows from a point to cover the frame, then blows past. With follow=True
         the element is positioned every frame by FILM3D.map's `follow` option (e.g. bursting out of a map pin)."""
         pos = "" if follow else f"left:{x}px;top:{y}px;"
         self.raw_clip(tid, at - 0.12, 1.4, z, f'<div id="{tid}_p" style="position:absolute;{pos}width:0;height:0">'
@@ -362,7 +368,7 @@ class Film:
         faces = "".join(f"@font-face{{font-family:'{fam}';font-weight:{wt};src:url({src})}}" for fam, wt, src in th.font_faces)
         return faces + f"""
 *{{margin:0;padding:0;box-sizing:border-box}}
-#root{{position:relative;width:1920px;height:1080px;overflow:hidden;background:{th.bg};font-family:'{th.display}',sans-serif;color:{th.paper}}}
+#root{{position:relative;width:{self.W}px;height:{self.Hpx}px;overflow:hidden;background:{th.bg};font-family:'{th.display}',sans-serif;color:{th.paper}}}
 .clip{{position:absolute;inset:0}}
 .giant{{position:absolute;left:0;white-space:nowrap;font-family:'{th.display}';font-weight:800;font-size:420px;letter-spacing:-14px;line-height:1;color:transparent;text-transform:uppercase}}
 .win{{position:absolute;border-radius:24px;overflow:hidden;background:{th.bg};box-shadow:0 34px 70px rgba(0,0,0,.38),0 0 0 7px rgba(255,255,255,.96)}}
@@ -390,7 +396,7 @@ class Film:
 .ov{{position:absolute;inset:0;overflow:visible}} .illo{{position:absolute;overflow:visible}}
 .stat{{position:absolute;font-family:'{th.display}'}} .stat .v{{font-size:150px;font-weight:800;letter-spacing:-5px;line-height:1}}
 .stat .l{{margin-top:10px;font-family:'{th.body}';font-size:28px;font-weight:500;letter-spacing:4px;text-transform:uppercase}}
-.city{{position:absolute;transform:translate(-50%,-100%);font-family:'{th.body}';font-size:22px;font-weight:500;color:{th.paper};white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);opacity:0}}
+.maplabel{{position:absolute;transform:translate(-50%,-100%);font-family:'{th.body}';font-size:22px;font-weight:500;color:{th.paper};white-space:nowrap;text-shadow:0 2px 8px rgba(0,0,0,.8);opacity:0}}
 #grain{{position:absolute;inset:-200px;background:url(assets/grain.png);opacity:.06;mix-blend-mode:overlay;pointer-events:none}}
 #vig{{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 62%,rgba(0,0,0,.26) 100%);pointer-events:none}}
 """
@@ -411,9 +417,9 @@ class Film:
                    '<feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>')
         aud = f'<audio id="music" class="clip" data-start="0" data-duration="{T}" src="{audio}"></audio>' if audio else ""
         scripts = "".join(f'<script src="{s}"></script>' for s in self.scripts)
-        html = (f'<!doctype html>\n<html lang="en" data-resolution="landscape">\n<head><meta charset="UTF-8"><meta name="viewport" content="width=1920, height=1080">\n'
+        html = (f'<!doctype html>\n<html lang="en" data-resolution="{"portrait" if self.Hpx > self.W else "landscape"}">\n<head><meta charset="UTF-8"><meta name="viewport" content="width={self.W}, height={self.Hpx}">\n'
                 f'{scripts}\n<style>{self.css()}{extra_css}</style></head>\n<body>\n'
-                f'<div id="root" data-composition-id="main" data-start="0" data-duration="{T}" data-width="1920" data-height="1080">\n{filters}\n'
+                f'<div id="root" data-composition-id="main" data-start="0" data-duration="{T}" data-width="{self.W}" data-height="{self.Hpx}">\n{filters}\n'
                 + "\n".join(self.H) + f"\n{aud}\n</div>\n<script>\n" + "\n".join(self.INIT3D) + "\n" + "\n".join(self.JS) + "\n</script>\n</body></html>")
         with open(out_path, "w") as fh:
             fh.write(html)

@@ -25,11 +25,11 @@ Counters count with `power2.out` over 1–1.5 s and land on a downbeat. Format w
 | Band wipe | a colour sweep from the next chapter | moving into a new phase |
 | Whip pan | energy, speed | between two busy layouts on the same ground |
 | Object becomes the world | the illustration scales up to fill frame | an object leads into its next stage |
-| Tape / strip wipe | physical, tactile | packaging, crafts |
-| Texture cover | frost, smoke, steam creeping in from the edges | temperature/atmosphere change |
-| Shutter / door | a door slamming and rolling up on the next scene | from inside to outside, dispatch |
+| Strip wipe | physical, tactile (tape, ribbon, a paper strip) | crafted or hands-on subjects |
+| Texture cover | a texture (smoke, paper, fabric, ink, clouds) creeping in from the edges | a change of mood, place or atmosphere |
+| Panel wipe | a panel (door, curtain, wall, page) drops over the frame and lifts on the next scene | inside to outside, before to after |
 | Cloud pass | camera tilts up through clouds and descends | from ground level to a map / overview |
-| Burst | powder/splash from a point fills frame | into an end card |
+| Burst | a splash, puff or confetti from a point fills frame | into an end card or a reveal |
 Avoid repeating a transition type within 20 s. Avoid circular irises and circle floods as a house style — they read cheap.
 
 ## Easing defaults

@@ -13,4 +13,4 @@
    frame carries text, labels or logos — and you must compare framing and details against the original before using it.
 5. **Freeze frames:** if a clip ends before its window, export its last frame (`ffmpeg -sseof -0.05 -i v.mp4 -frames:v 1 v_last.jpg`)
    and place it under the video so the window never goes empty.
-6. **Licensing:** stock footage only via licensed APIs (stock-footage-sourcer) with a sidecar licence file per clip.
+6. **Licensing:** stock footage and photos only from licensed sources (Pexels and Pixabay APIs; see `references/tools-and-sources.md`), with a licence note per file. Never download from YouTube or general web search results.

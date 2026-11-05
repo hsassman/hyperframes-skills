@@ -5,11 +5,11 @@ chapters already sit on the music grid, segments that start and end on hero bar 
 
 ## Choosing segments
 - Cut **between** transitions, never in the middle of one: start segments on bar lines where nothing is mid-flight.
-- Let a segment **end** with a transition (a whip out, a frost flash, a door slam) so the next hard cut lands on its downbeat.
-- Keep: hook with the opening line → 2–4 process beats → the dispatch/proof moment → the payoff → end card.
+- Let a segment **end** with a transition (a whip out, a texture flash, a panel landing) so the next hard cut lands on its downbeat.
+- Keep: hook with the opening line → the 2–4 strongest beats → the proof moment → the payoff → end card.
 - Put the payoff (counter, map) on the music edit's strongest phrase start.
 - End card needs ≥ 3 s after its last element lands, then a short fade (0.5–0.6 s) to the brand's deep colour.
-- Avoid segments whose content breaks client taste rules if alternatives exist.
+- Avoid segments whose content breaks the reviewer's taste rules if alternatives exist.
 
 ## Music edit
 Phrase-aligned splices sound natural: e.g. 30 s = track bars 2.4 → 24.4 (if the track starts 0.4 s before a bar) plus the
