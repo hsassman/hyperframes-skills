@@ -1,0 +1,5 @@
+numpy>=1.26
+soundfile>=0.12
+Pillow>=10
+opencv-python-headless>=4.9
+ffmpeg-normalize>=1.28

@@ -1,0 +1,11 @@
+{
+  "hero_picture": "renders/demo_picture.mp4",
+  "track": "music/track.wav",
+  "sfx_stem": "audio/out/sfx_stem.wav",
+  "music_stem": "audio/out/music_stem.wav",
+  "fade_color": "0x0F2A33",
+  "out": "audio/out",
+  "cuts": {
+    "10": {"segs": [[0.0, 4.0], [12.0, 14.0], [16.0, 20.0]], "music": [[0.0, 6.0], [44.0, 48.0]], "fade_in": 0.1, "fade_out": 0.5}
+  }
+}

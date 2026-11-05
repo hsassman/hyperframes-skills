@@ -1,0 +1,26 @@
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# motion-film kit build output (rebuilt by npm run build:3d)
+skills/motion-film/kit/node/dist/
+
+# motion-film example: everything setup.sh / sound.py / render generate
+skills/motion-film/example/assets/
+skills/motion-film/example/index.html
+skills/motion-film/example/events.json
+skills/motion-film/example/music/
+skills/motion-film/example/sfx/
+skills/motion-film/example/audio/
+skills/motion-film/example/renders/
+skills/motion-film/example/storyboard/
+
+# media
+*.mp4
+*.mov
+*.wav
+
+# HyperFrames local state
+.hyperframes/

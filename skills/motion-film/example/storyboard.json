@@ -1,0 +1,20 @@
+{
+  "title": "From seed to cup", "eyebrow": "Northwind Coffee (fictional) · process film · v1 storyboard",
+  "lede": "Every frame is a still pulled from the composition. Approve it or say which frames to change.",
+  "meta": ["20 s · 1920×1080 · 30 fps", "Music: demo placeholder (replace with a licensed track)", "No voice-over"],
+  "chapters": [
+    {"num": "01", "name": "Grown", "span": "0:00 – 0:06", "frames": [
+      {"t": 1.0, "title": "Hook", "text": "Dust drifts in a warm light beam; the title rises.", "sound": "soft room tone"},
+      {"t": 4.2, "title": "The sprout", "text": "The sprout draws on with a hand-picked sticker and arrow.", "sound": "pencil, sticker pop"},
+      {"t": 5.8, "title": "Band wipe", "text": "A deep band sweeps in to the next chapter.", "sound": "whoosh", "transition": true}]},
+    {"num": "02", "name": "Packed", "span": "0:06 – 0:12", "frames": [
+      {"t": 9.0, "title": "Counter", "text": "The parcel draws; the weekly count lands on a downbeat.", "sound": "ticks, chime"},
+      {"t": 11.8, "title": "Shutter", "text": "A roller door slams down and rolls up on the map.", "sound": "door slam", "transition": true}]},
+    {"num": "03", "name": "Shipped", "span": "0:12 – 0:16", "frames": [
+      {"t": 14.5, "title": "Map", "text": "Routes run from home to each city; labels follow the pins.", "sound": "whoosh per route"}]},
+    {"num": "04", "name": "Enjoyed", "span": "0:16 – 0:20", "frames": [
+      {"t": 16.4, "title": "Burst", "text": "A burst from home fills the frame.", "sound": "powder puff", "transition": true},
+      {"t": 18.8, "title": "End card", "text": "Cup illustration, line and logo placeholder.", "sound": "music resolves"}]}
+  ],
+  "notes": ["All figures in the demo are placeholders — mark real ones [CONFIRM] until the client signs them off."]
+}

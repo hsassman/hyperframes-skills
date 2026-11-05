@@ -1,0 +1,22 @@
+{
+  "name": "motion-film-kit-node",
+  "private": true,
+  "type": "module",
+  "description": "Build tools for the motion-film kit: the Three.js layer bundle, country geography and hand-drawn illustrations.",
+  "scripts": {
+    "build:3d": "esbuild src/film3d.js --bundle --format=iife --minify --target=es2020 --outfile=dist/film3d.js",
+    "geo": "node geo.mjs",
+    "illos": "node illos.mjs"
+  },
+  "dependencies": {
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/poppins": "^5.3.0",
+    "esbuild": "^0.24.0",
+    "gsap": "^3.14.2",
+    "roughjs": "^4.6.6",
+    "three": "^0.170.0",
+    "topojson-client": "^3.1.0",
+    "world-atlas": "^2.0.2"
+  }
+}
